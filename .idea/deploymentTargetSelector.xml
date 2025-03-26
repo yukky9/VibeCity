@@ -3,11 +3,11 @@
   <component name="deploymentTargetSelector">
     <selectionStates>
       <SelectionState runConfigName="app">
-        <option name="selectionMode" value="DIALOG" />
-        <DropdownSelection timestamp="2025-03-25T05:53:06.450452200Z">
+        <option name="selectionMode" value="DROPDOWN" />
+        <DropdownSelection timestamp="2025-03-25T06:19:15.128823100Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\MAS_3_16\.android\avd\Android_Accelerated_x86_Oreo.avd" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\MAS_3_16\.android\avd\Pixel_3a.avd" />
             </handle>
           </Target>
         </DropdownSelection>
