@@ -1,9 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.VibeCity" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <!-- Светлая тема (по умолчанию) -->
+    <style name="Theme.MyApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#5F81FF</item> <!-- Основной цвет (синий) -->
+        <item name="colorPrimaryVariant">#3A5BD6</item> <!-- Темнее primary -->
+        <item name="colorOnPrimary">#FFFFFF</item> <!-- Текст на primary -->
+        <item name="colorSecondary">#2EF226</item> <!-- Акцентный цвет (зелёный) -->
+        <item name="colorSecondaryVariant">#1ECF1A</item> <!-- Темнее secondary -->
+        <item name="colorOnSecondary">#000000</item> <!-- Текст на secondary -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
     </style>
-
-    <style name="Theme.VibeCity" parent="Base.Theme.VibeCity" />
 </resources>

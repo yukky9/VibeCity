@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="purple_200">#5F81FF</color> <!-- Синий -->
+    <color name="purple_500">#5F81FF</color>
+    <color name="purple_700">#3A5BD6</color>
+    <color name="teal_200">#2EF226</color> <!-- Зелёный -->
+    <color name="teal_700">#1ECF1A</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="purple_blue">#5F81FF</color>
-    <color name="green">#2EF226</color>
+    <color name="background_light">#FAFAFA</color>
+    <color name="background_dark">#121212</color>
 </resources>
