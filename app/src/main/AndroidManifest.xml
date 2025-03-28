@@ -25,6 +25,8 @@
 
         <activity android:name=".MapActivity"/>
         <activity android:name=".ProfileActivity"/>
+        <activity android:name=".EditProfileActivity"
+            android:parentActivityName=".ProfileActivity"/>
 
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />

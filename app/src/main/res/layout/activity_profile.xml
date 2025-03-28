@@ -4,24 +4,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- ScrollView для прокрутки контента профиля -->
-    <ScrollView
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottomNavigationView"
         android:padding="24dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="24dp"
-                android:src="@drawable/ic_profile"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/ic_profile_placeholder"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#5F81FF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Изменить фото"
+                android:textColor="#5F81FF"
+                android:layout_marginBottom="24dp"/>
 
             <TextView
                 android:id="@+id/tvName"
@@ -39,13 +48,23 @@
                 android:gravity="center"/>
 
             <Button
-                android:id="@+id/btnLogout"
+                android:id="@+id/btnEditProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Выйти"
-                android:backgroundTint="#FF5F81FF"
+                android:text="Редактировать профиль"
+                android:backgroundTint="#5F81FF"
                 android:textColor="@android:color/white"/>
+
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Выйти"
+                android:backgroundTint="#F44336"
+                android:textColor="@android:color/white"/>
+
         </LinearLayout>
     </ScrollView>
 
