@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements EventsAdapter.OnE
         int id = item.getItemId();
 
         if (id == R.id.nav_events) {
-            // Уже на экране мероприятий
             return true;
         } else if (id == R.id.nav_map) {
             startActivity(new Intent(this, MapActivity.class));

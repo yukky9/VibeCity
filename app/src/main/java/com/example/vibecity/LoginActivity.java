@@ -51,4 +51,16 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
         });
     }
+    private void performLogin(String email, String password) {
+        // После успешной аутентификации:
+        SharedPreferences prefs = getSharedPreferences("user_session", MODE_PRIVATE);
+        prefs.edit()
+                .putBoolean("is_logged_in", true)
+                .putString("user_email", email)
+                .putString("user_name", "Имя Пользователя") // Здесь реальное имя из БД/API
+                .apply();
+
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
 }
