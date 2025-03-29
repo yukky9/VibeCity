@@ -20,17 +20,10 @@
                 android:id="@+id/ivProfile"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="14dp"
                 android:src="@drawable/ic_profile_placeholder"
                 app:civ_border_width="2dp"
                 app:civ_border_color="#5F81FF"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Изменить фото"
-                android:textColor="#5F81FF"
-                android:layout_marginBottom="24dp"/>
 
             <TextView
                 android:id="@+id/tvName"

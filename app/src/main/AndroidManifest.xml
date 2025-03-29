@@ -20,8 +20,8 @@
             </intent-filter>
         </activity>
         <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR_API_KEY"/>
+            android:name="com.yandex.maps.mobile.apikey"
+            android:value="ВАШ_API_КЛЮЧ_ЯНДЕКС" />
 
         <activity android:name=".MapActivity"/>
         <activity android:name=".ProfileActivity"/>
@@ -33,4 +33,5 @@
         <activity android:name=".MainActivity" />
     </application>
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 </manifest>

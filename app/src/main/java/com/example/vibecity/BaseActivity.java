@@ -3,6 +3,7 @@ package com.example.vibecity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -18,9 +19,16 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResource());
 
-        setupNavigation();
+        // Инициализация навигации только если она есть в макете
+        try {
+            bottomNavigationView = findViewById(R.id.bottomNavigationView);
+            if (bottomNavigationView != null) {
+                setupNavigation();
+            }
+        } catch (Exception e) {
+            Log.e("BASE_ACTIVITY", "Navigation setup skipped", e);
+        }
     }
-
     private void setupNavigation() {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnItemSelectedListener(this::onNavigationItemSelected);
