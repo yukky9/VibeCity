@@ -35,6 +35,7 @@ dependencies {
     implementation libs.activity
     implementation libs.constraintlayout
     implementation libs.play.services.maps
+    implementation libs.androidx.appcompat
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
@@ -44,4 +45,5 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.14.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
     implementation 'com.yandex.android:maps.mobile:4.5.1-full'
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
 }

@@ -29,7 +29,8 @@
         <activity android:name=".ProfileActivity"/>
         <activity android:name=".EditProfileActivity"
             android:parentActivityName=".ProfileActivity"/>
-
+        <activity android:name=".CategoriesActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" />

@@ -1,7 +1,9 @@
 package com.example.vibecity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity implements EventsAdapter.OnEventClickListener {
 
@@ -22,6 +25,21 @@ public class MainActivity extends AppCompatActivity implements EventsAdapter.OnE
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        Set<String> categories = prefs.getStringSet("user_categories", null);
+
+        if (categories == null || categories.isEmpty()) {
+            // Если категории не выбраны, перенаправляем на выбор
+            startActivity(new Intent(this, CategoriesActivity.class));
+            finish();
+            return;
+        }
+
+        // Используем выбранные категории
+        for (String category : categories) {
+            Log.d("UserCategories", category);
+        }
 
         setupRecyclerView();
         setupBottomNavigation();

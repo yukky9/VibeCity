@@ -10,9 +10,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.google.android.flexbox.FlexboxLayout;
+
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -22,6 +27,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends BaseActivity {
@@ -33,6 +41,7 @@ public class ProfileActivity extends BaseActivity {
     private TextView tvName, tvEmail;
     private Button btnEditProfile, btnLogout;
     private SharedPreferences sharedPreferences;
+    private FlexboxLayout flexboxCategories;
 
     @Override
     protected int getLayoutResource() {
@@ -53,6 +62,7 @@ public class ProfileActivity extends BaseActivity {
         initViews();
         loadUserData();
         setupClickListeners();
+        setupEditCategoriesButton();
     }
 
     private void initViews() {
@@ -61,8 +71,41 @@ public class ProfileActivity extends BaseActivity {
         tvEmail = findViewById(R.id.tvEmail);
         btnEditProfile = findViewById(R.id.btnEditProfile);
         btnLogout = findViewById(R.id.btnLogout);
+        flexboxCategories = findViewById(R.id.flexboxCategories);
     }
 
+    private void displayUserCategories() {
+        flexboxCategories.removeAllViews();
+        Set<String> categories = sharedPreferences.getStringSet("user_categories", new HashSet<>());
+
+        if (categories.isEmpty()) {
+            TextView tv = new TextView(this);
+            tv.setText("Интересы не выбраны");
+            tv.setTextColor(ContextCompat.getColor(this, R.color.text_secondary));
+            flexboxCategories.addView(tv);
+            return;
+        }
+
+        for (String category : categories) {
+            @LayoutRes int layoutRes = getCategoryLayoutRes(category);
+            if (layoutRes != 0) {
+                View chip = LayoutInflater.from(this).inflate(layoutRes, flexboxCategories, false);
+                flexboxCategories.addView(chip);
+            }
+        }
+    }
+
+    @LayoutRes
+    private int getCategoryLayoutRes(String category) {
+        switch (category) {
+            case "Музыка": return R.layout.chip_category_music;
+            case "Спорт": return R.layout.chip_category_sport;
+            case "Еда": return R.layout.chip_category_food;
+            case "Искусство": return R.layout.chip_category_art;
+            case "Путешествия": return R.layout.chip_category_travel;
+            default: return 0;
+        }
+    }
     private void loadUserData() {
         String userName = sharedPreferences.getString("user_name", "Пользователь");
         String userEmail = sharedPreferences.getString("user_email", "email@example.com");
@@ -71,7 +114,14 @@ public class ProfileActivity extends BaseActivity {
         tvEmail.setText(userEmail);
         loadProfileImage();
     }
-
+    private void setupEditCategoriesButton() {
+        Button btnEditCategories = findViewById(R.id.btnEditCategories);
+        btnEditCategories.setOnClickListener(v -> {
+            Intent intent = new Intent(this, CategoriesActivity.class);
+            intent.putExtra("from_profile", true);
+            startActivity(intent);
+        });
+    }
     private void loadProfileImage() {
         String imagePath = sharedPreferences.getString("profile_image_path", null);
 
@@ -182,6 +232,7 @@ public class ProfileActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        displayUserCategories();
         loadUserData(); // Обновляем данные при возвращении на экран
     }
 }

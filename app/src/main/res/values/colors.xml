@@ -9,4 +9,15 @@
     <color name="white">#FFFFFFFF</color>
     <color name="background_light">#FAFAFA</color>
     <color name="background_dark">#121212</color>
+    <color name="background">#FFF5F5F5</color>
+    <color name="text_primary">#DE000000</color>
+    <color name="switch_track">#FFBB86FC</color>
+    <color name="button_primary">#FF6200EE</color>
+    <color name="category_music">#FF9C27B0</color>
+    <color name="category_sport">#FF3F51B5</color>
+    <color name="category_food">#FF4CAF50</color>
+    <color name="category_art">#FFFF5722</color>
+    <color name="category_travel">#FF607D8B</color>
+    <color name="text_secondary">#D0D0D0</color>
+    <color name="primary">#BA85FA</color>
 </resources>
