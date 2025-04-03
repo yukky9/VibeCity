@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,6 +24,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -32,7 +35,8 @@ import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ProfileActivity extends BaseActivity {
+public class ProfileActivity extends BaseActivity implements
+        BottomNavigationView.OnNavigationItemSelectedListener{
 
     private static final int PICK_IMAGE_REQUEST = 101;
     private static final int STORAGE_PERMISSION_CODE = 102;
@@ -58,6 +62,10 @@ public class ProfileActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
+        // Настройка нижнего меню
+        BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
+        bottomNav.setOnNavigationItemSelectedListener(this);
+        bottomNav.setSelectedItemId(R.id.nav_profile);
 
         initViews();
         loadUserData();
@@ -234,5 +242,21 @@ public class ProfileActivity extends BaseActivity {
         super.onResume();
         displayUserCategories();
         loadUserData(); // Обновляем данные при возвращении на экран
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_profile) {
+            return true;
+        } else if (id == R.id.nav_map) {
+            startActivity(new Intent(this, MapActivity.class));
+            return true;
+        } else if (id == R.id.nav_events) {
+            startActivity(new Intent(this, MainActivity.class));
+            return true;
+        }
+        return false;
     }
 }

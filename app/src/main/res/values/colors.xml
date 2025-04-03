@@ -20,4 +20,6 @@
     <color name="category_travel">#FF607D8B</color>
     <color name="text_secondary">#D0D0D0</color>
     <color name="primary">#BA85FA</color>
+    <color name="error">#FF0000</color>  <!-- Example red color for error -->
+    <color name="secondary">#FFA500</color>  <!-- Example orange color for secondary -->
 </resources>

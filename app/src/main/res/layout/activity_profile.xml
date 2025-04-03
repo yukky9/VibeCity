@@ -1,96 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <!-- Основной контент с возможностью прокрутки -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNavigationView"
+        android:fillViewport="true">
 
-        <!-- Профиль -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="24dp">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/ivProfile"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/ic_profile_placeholder"
-                app:civ_border_width="2dp"
-                app:civ_border_color="@color/primary"/>
-
+            <!-- Профиль -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="16dp"
-                android:layout_gravity="center">
+                android:orientation="horizontal"
+                android:layout_marginBottom="24dp">
 
-                <TextView
-                    android:id="@+id/tvName"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_profile_placeholder"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/primary"/>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_primary"/>
+                    android:orientation="vertical"
+                    android:layout_marginStart="16dp"
+                    android:layout_gravity="center">
 
-                <TextView
-                    android:id="@+id/tvEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/text_secondary"
-                    android:layout_marginTop="4dp"/>
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
             </LinearLayout>
+
+            <!-- Категории -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Мои интересы:"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/flexboxCategories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:flexWrap="wrap"
+                app:justifyContent="flex_start"/>
+
+            <!-- Кнопки -->
+            <Button
+                android:id="@+id/btnEditCategories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Изменить интересы"
+                android:layout_marginTop="16dp"
+                style="@style/ButtonPrimary"/>
+
+            <Button
+                android:id="@+id/btnEditProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Редактировать профиль"
+                android:layout_marginTop="8dp"
+                style="@style/ButtonSecondary"/>
+
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Выйти"
+                android:layout_marginTop="24dp"
+                style="@style/ButtonOutline"/>
         </LinearLayout>
+    </ScrollView>
 
-        <!-- Категории -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Мои интересы:"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_primary"
-            android:layout_marginBottom="8dp"/>
-
-        <com.google.android.flexbox.FlexboxLayout
-            android:id="@+id/flexboxCategories"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:flexWrap="wrap"
-            app:justifyContent="flex_start"/>
-
-        <!-- Кнопки -->
-        <Button
-            android:id="@+id/btnEditCategories"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Изменить интересы"
-            android:layout_marginTop="16dp"
-            style="@style/ButtonPrimary"/>
-
-        <Button
-            android:id="@+id/btnEditProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Редактировать профиль"
-            android:layout_marginTop="8dp"
-            style="@style/ButtonSecondary"/>
-
-        <Button
-            android:id="@+id/btnLogout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Выйти"
-            android:layout_marginTop="24dp"
-            style="@style/ButtonOutline"/>
-    </LinearLayout>
-</ScrollView>
+    <!-- Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemIconTint="@drawable/nav_item_color_state"
+        app:itemTextColor="@drawable/nav_item_color_state"/>
+</RelativeLayout>
