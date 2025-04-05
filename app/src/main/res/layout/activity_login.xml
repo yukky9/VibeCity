@@ -7,43 +7,19 @@
     android:gravity="center"
     android:background="?android:attr/colorBackground">
 
-    <EditText
-        android:id="@+id/etEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textColorHint="?android:attr/textColorHint"
-        android:backgroundTint="@color/purple_200"
-    android:inputType="textEmailAddress" />
-
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textColorHint="?android:attr/textColorHint"
-        android:backgroundTint="@color/purple_200"
-        android:inputType="textPassword"
-        android:layout_marginTop="10dp" />
+    <ImageView
+        android:layout_width="411dp"
+        android:layout_height="245dp"
+        android:src="@mipmap/ic_launcher_round"
+        />
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnOpenBot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Войти"
+        android:text="Поличить код"
         android:backgroundTint="@color/teal_200"
     android:textColor="@color/black"
     android:layout_marginTop="20dp" />
-
-    <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Регистрация"
-        android:backgroundTint="@color/purple_200"
-    android:textColor="@color/white"
-    android:layout_marginTop="10dp" />
 
 </LinearLayout>

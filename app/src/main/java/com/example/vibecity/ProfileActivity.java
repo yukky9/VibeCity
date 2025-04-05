@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.metrics.Event;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,6 +24,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -30,7 +34,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -41,8 +47,10 @@ public class ProfileActivity extends BaseActivity implements
     private static final int PICK_IMAGE_REQUEST = 101;
     private static final int STORAGE_PERMISSION_CODE = 102;
 
+    private RecyclerView rvFavorites;
+    private FavoriteEventsAdapter adapter;
     private CircleImageView ivProfile;
-    private TextView tvName, tvEmail;
+    private TextView tvName;
     private Button btnEditProfile, btnLogout;
     private SharedPreferences sharedPreferences;
     private FlexboxLayout flexboxCategories;
@@ -76,10 +84,19 @@ public class ProfileActivity extends BaseActivity implements
     private void initViews() {
         ivProfile = findViewById(R.id.ivProfile);
         tvName = findViewById(R.id.tvName);
-        tvEmail = findViewById(R.id.tvEmail);
         btnEditProfile = findViewById(R.id.btnEditProfile);
         btnLogout = findViewById(R.id.btnLogout);
         flexboxCategories = findViewById(R.id.flexboxCategories);
+        rvFavorites = findViewById(R.id.rvFavorites);
+        rvFavorites.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new FavoriteEventsAdapter(getFavoriteEvents());
+        rvFavorites.setAdapter(adapter);
+    }
+
+    private List<Event> getFavoriteEvents() {
+        // Здесь реализуйте получение избранных мероприятий
+        // Например, из БД или SharedPreferences
+        return new ArrayList<>(); // верните реальный список
     }
 
     private void displayUserCategories() {
@@ -116,10 +133,8 @@ public class ProfileActivity extends BaseActivity implements
     }
     private void loadUserData() {
         String userName = sharedPreferences.getString("user_name", "Пользователь");
-        String userEmail = sharedPreferences.getString("user_email", "email@example.com");
 
         tvName.setText(userName);
-        tvEmail.setText(userEmail);
         loadProfileImage();
     }
     private void setupEditCategoriesButton() {
@@ -227,8 +242,15 @@ public class ProfileActivity extends BaseActivity implements
     }
 
     private void logoutUser() {
+        // Очищаем все данные пользователя
         sharedPreferences.edit()
                 .clear()
+                .apply();
+
+        // Специально сбрасываем флаг авторизации
+        getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE)
+                .edit()
+                .putBoolean(LoginActivity.KEY_IS_LOGGED_IN, false)
                 .apply();
 
         Intent intent = new Intent(this, LoginActivity.class);

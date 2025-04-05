@@ -11,42 +11,31 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText etName, etEmail, etPassword;
-    private Button btnRegister;
-    private SharedPreferences prefs;
+    private static final String PREFS_NAME = "AuthPrefs";
+    private static final String KEY_IS_LOGGED_IN = "isLoggedIn";
+    private static final String CORRECT_CODE = "123456"; // Код, который выдаёт бот
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        etName = findViewById(R.id.etName);
-        etEmail = findViewById(R.id.etEmail);
-        etPassword = findViewById(R.id.etPassword);
-        btnRegister = findViewById(R.id.btnRegister);
-        prefs = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+        EditText etCode = findViewById(R.id.etCode);
+        Button btnConfirm = findViewById(R.id.btnConfirm);
 
-        btnRegister.setOnClickListener(v -> {
-            String name = etName.getText().toString().trim();
-            String email = etEmail.getText().toString().trim();
-            String password = etPassword.getText().toString().trim();
+        btnConfirm.setOnClickListener(v -> {
+            String enteredCode = etCode.getText().toString().trim();
 
-            if (name.isEmpty() || email.isEmpty() || password.isEmpty()){
-                Toast.makeText(this, "Заполните все поля!", Toast.LENGTH_SHORT).show();
-                return;
+            if (enteredCode.equals(CORRECT_CODE)) {
+                SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
+                editor.putBoolean(KEY_IS_LOGGED_IN, true);
+                editor.apply();
+
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+            } else {
+                Toast.makeText(this, "Неверный код", Toast.LENGTH_SHORT).show();
             }
-
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("name", name);
-            editor.putString("email", email);
-            editor.putString("password", password);
-            editor.putBoolean("isLoggedIn", true);
-            editor.apply();
-
-            Toast.makeText(this, "Регистрация успешна!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(RegisterActivity.this, CategoriesActivity.class);
-            startActivity(intent);
-            finish();
         });
     }
 }
